@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
 
 import models.Tasks;
 import utils.DBUtil;
@@ -38,6 +39,10 @@ public class IndexServlet extends HttpServlet {
         response.getWriter().append(Integer.valueOf(tasks.size()).toString());
 
         em.close();
+
+        request.setAttribute("tasks", tasks);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
+        rd.forward(request, response);
     }
 
 }
